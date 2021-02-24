@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { GlobalContext } from './GlobalState';
-import { Trash, Pencil } from 'heroicons-react';
+import { Trash } from 'heroicons-react';
 import EditNote from './editNote';
 
 const NoteList = () => {
-  const { notes, deleteNote, editNote } = useContext(GlobalContext);
+  const { notes, deleteNote } = useContext(GlobalContext);
   const [activeIndex, setActiveIndex] = useState(1);
 
   const handleOnClick = (index) => {
