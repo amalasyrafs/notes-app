@@ -1,24 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import CreateNote from './components/createNote';
+import { GlobalProvider } from './components/GlobalState';
+import NoteList from './components/note-list';
+import SearchBar from './components/search-bar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GlobalProvider>
+      <div className='App'>
+        <div className='container'>
+          <h1>NOTES APP</h1>
+          <h1>LIST OF NOTES:</h1>
+          <CreateNote />
+          <SearchBar />
+          <NoteList />
+        </div>
+      </div>
+    </GlobalProvider>
   );
 }
 
