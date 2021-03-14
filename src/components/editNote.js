@@ -35,7 +35,8 @@ const EditNote = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     setShowModal(false);
-    editExistNote(selectedNote);
+    editNote(selectedNote);
+    // editExistNote(selectedNote); // for use when connected to the database
   };
 
   const handleOnChange = (userKey, value) =>

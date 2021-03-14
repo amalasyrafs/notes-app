@@ -41,10 +41,10 @@ const NoteList = () => {
   return (
     <>
       <CreateNote />
-      <SearchBar />
+      {/* <SearchBar /> */}
 
       <div className='container'>
-        <div className='grid grid-cols-12'>
+        <div className='grid grid-cols-12 mt-6'>
           <div className='bg-green-900 min-h-screen col-span-4 rounded'>
             <ul>
               {notes.map((note) => {
@@ -77,8 +77,8 @@ const NoteList = () => {
                     </span>
                     <EditNote activeIndex={activeIndex} />
                     <button
-                      // onClick={() => deleteNote(note._id)}
-                      onClick={() => deleteSingleNote(note._id)}
+                      onClick={() => deleteNote(note._id)}
+                      // onClick={() => deleteSingleNote(note._id)} // for use when connected to the database
                       className='notetools-button'
                     >
                       <Trash />

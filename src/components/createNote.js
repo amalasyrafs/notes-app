@@ -24,7 +24,8 @@ const CreateNote = () => {
       label: noteLabel,
     };
     // console.log(newNote);
-    addNewNote(newNote);
+    addNote(newNote);
+    // addNewNote(newNote); // for use when connected to the database
   };
 
   const addNewNote = async (newNote) => {
