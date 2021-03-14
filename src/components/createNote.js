@@ -8,7 +8,7 @@ const CreateNote = () => {
   const [noteAuthor, setNoteAuthor] = useState('');
   const [noteBody, setNoteBody] = useState('');
   const [noteLabel, setNoteLabel] = useState('');
-  const { addNote, notes } = useContext(GlobalContext);
+  const { addNote } = useContext(GlobalContext);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -18,14 +18,31 @@ const CreateNote = () => {
     setNoteBody('');
     setNoteLabel('');
     const newNote = {
-      noteId: notes.length + 1,
       title: noteTitle,
       author: noteAuthor,
       body: noteBody,
       label: noteLabel,
     };
-    console.log(newNote);
-    addNote(newNote);
+    // console.log(newNote);
+    addNewNote(newNote);
+  };
+
+  const addNewNote = async (newNote) => {
+    try {
+      const res = await fetch('/api/notes', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newNote),
+      });
+      const data = await res.json();
+      addNote(data);
+      // fetchNotes();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

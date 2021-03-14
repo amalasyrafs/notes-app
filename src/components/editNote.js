@@ -2,27 +2,44 @@ import React, { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from './GlobalState';
 import { Pencil } from 'heroicons-react';
 
-const EditNote = (props) => {
+const EditNote = () => {
   const [showModal, setShowModal] = useState(false);
-  const { editNote, notes } = useContext(GlobalContext);
+  const { notes, editNote, activeIndex } = useContext(GlobalContext);
   const [selectedNote, setSelectedNote] = useState();
 
   useEffect(() => {
-    const index = props.activeIndex;
-    const selectNote = notes.find((note) => note.noteId === index);
+    const selectNote = notes.find((note) => note._id === activeIndex);
+    // console.log(selectNote);
     setSelectedNote(selectNote);
-  }, [props.activeIndex, notes]);
+    // console.log(selectNote);
+  }, [activeIndex, notes]);
+
+  const editExistNote = async (selectedNote) => {
+    try {
+      const id = selectedNote._id;
+      const res = await fetch(`api/notes/${id}`, {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(selectedNote),
+      });
+      const data = await res.json();
+      editNote(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
     setShowModal(false);
-    editNote(selectedNote);
+    editExistNote(selectedNote);
   };
 
   const handleOnChange = (userKey, value) =>
     setSelectedNote({ ...selectedNote, [userKey]: value });
-
-  // console.log(activeIndex);
 
   return (
     <>
